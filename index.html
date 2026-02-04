@@ -1,24 +1,285 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>portfolio</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <title>My Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 明朝系フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #BACCC9;
+      --text-dark: #1f2d2b;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Shippori Mincho", serif;
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =====================
+       ヘッダー & メニュー
+    ====================== */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 1rem;
+      z-index: 100;
+    }
+
+    .menu-btn {
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background: var(--white);
+      padding: 2rem 1.5rem;
+      transition: 0.3s;
+      z-index: 200;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+    }
+
+    nav.active {
+      left: 0;
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav li {
+      margin-bottom: 1.2rem;
+    }
+
+    nav a {
+      color: var(--text-dark);
+      font-size: 1rem;
+    }
+
+    /* =====================
+       ヒーローエリア
+    ====================== */
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(
+        to bottom,
+        var(--accent),
+        #dfeceb
+      );
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .icon {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: white;
+      margin-bottom: 1rem;
+      background-image: url("icon.png"); /* ←差し替え */
+      background-size: cover;
+      background-position: center;
+    }
+
+    .username {
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* =====================
+       ダイヤアニメ背景
+    ====================== */
+
+    .diamonds {
+      position: absolute;
+      right: 5%;
+      top: 20%;
+      pointer-events: none;
+    }
+
+    .diamond {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 40px;
+      background: white;
+      opacity: 0.3;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      animation: sparkle 6s ease-in-out infinite;
+    }
+
+    .diamond:nth-child(2) {
+      animation-delay: 1s;
+      opacity: 0.2;
+    }
+
+    .diamond:nth-child(3) {
+      animation-delay: 2s;
+      opacity: 0.15;
+    }
+
+    @keyframes sparkle {
+      0% { transform: scaleX(0.2); }
+      50% { transform: scaleX(1.2); }
+      100% { transform: scaleX(0.2); }
+    }
+
+    /* =====================
+       セクション共通
+    ====================== */
+
+    section {
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+
+    section h2 {
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+      color: var(--accent);
+    }
+
+    /* =====================
+       ナビボタン
+    ====================== */
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-buttons a {
+      border: 1px solid var(--accent);
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      color: var(--accent);
+      transition: 0.3s;
+    }
+
+    .nav-buttons a:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* =====================
+       SNS
+    ====================== */
+
+    .sns {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .sns a {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    footer {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: var(--accent);
+    }
+  </style>
 </head>
+
 <body>
-  <div class="container">
-    <img src="images/icon.jpg" alt="icon" class="icon">
 
-    <h1>Welcome</h1>
+<header>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
 
-    <nav>
-      <a href="profile.html" class="btn">Profile</a>
-      <a href="artworks.html" class="btn">Artworks</a>
-    </nav>
+<nav id="menu">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#request">About Request</a></li>
+    <li><a href="https://twitter.com/" target="_blank">X</a></li>
+    <li><a href="mailto:yourmail@example.com">Mail</a></li>
+  </ul>
+</nav>
 
-    <div class="sns-links">
-      <a href="https://twitter.com/hyuaru" target="_blank">Twitter</a>
-    </div>
+<div class="hero">
+  <div class="diamonds">
+    <div class="diamond"></div>
+    <div class="diamond"></div>
+    <div class="diamond"></div>
   </div>
+
+  <div class="icon"></div>
+  <div class="username">Your Name</div>
+</div>
+
+<section>
+  <div class="nav-buttons">
+    <a href="#profile">Profile</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#request">About Request</a>
+  </div>
+</section>
+
+<section id="profile">
+  <h2>Profile</h2>
+  <p>ここにプロフィール文を書きます。</p>
+</section>
+
+<section id="portfolio">
+  <h2>Portfolio</h2>
+  <p>作品をここに並べていく想定です。</p>
+</section>
+
+<section id="request">
+  <h2>About Request</h2>
+  <p>有償依頼についての説明。</p>
+</section>
+
+<footer>
+  <div class="sns">
+    <a href="https://twitter.com/" target="_blank">X</a>
+    <a href="https://youtube.com/" target="_blank">YouTube</a>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+  }
+</script>
+
 </body>
 </html>
+
